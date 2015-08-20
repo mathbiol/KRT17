@@ -13,7 +13,7 @@ krt17=function(div){
         })
         // navigate cBio
         cbio.getTypesOfCancer(function(x){
-            $('<div id="cBioNav"><ol id="cBioNavOl"></ol></div>').appendTo(div)
+            $('<div id="cBioNav"><h2 style="color:maroon">Analysis of current cBio data for KRT17</h2><ol id="cBioNavOl"></ol></div>').appendTo(div)
             x=cbio.table(x) // tab structure
             /*// sort names
             ind=jmat.range(0,x.name.length-1)
@@ -24,14 +24,32 @@ krt17=function(div){
             // list results
 
             for(var i=0; i<x.name.length;i++){
-                $('<li> <input id="cBioTumorCheck_'+i+'" type="checkbox"> '+x.name[i]+'</li>').appendTo(cBioNavOl)
+                $('<li> <input id="cBioTumorCheck_'+i+'" type="checkbox" onchange="krt17.cbioAnalysisTumor(this,'+i+')"> '+x.name[i]+'</li>').appendTo(cBioNavOl)
             }
             4
         })
+
+        // navigate icgc
 
 
         4
     }
 
 
+}
+
+krt17.cbioAnalysisTumor=function(that,i){
+    var li = document.getElementById(that.id)
+    if((li.checked)&&($('div',that.parentElement).length==0)){
+        $('<div style="color:blue">['+Date()+'] Analysis displayed here or accumulated elsewhere.</div>').appendTo(that.parentElement)
+        that.parentElement.style.color="blue"
+    }else{
+        if(li.checked){
+            $('div',that.parentElement).show()
+        }else{
+            $('div',that.parentElement).hide()
+        }
+    }
+
+    4
 }
