@@ -15,9 +15,16 @@ krt17=function(div){
         cbio.getTypesOfCancer(function(x){
             $('<div id="cBioNav"><ol id="cBioNavOl"></ol></div>').appendTo(div)
             x=cbio.table(x) // tab structure
-            div
+            /*// sort names
+            ind=jmat.range(0,x.name.length-1)
+            ind.sort(function(a,b){
+                JSON.stringify([x.name[a],x.name[b]].sort())==JSON.stringify([x.name[a],x.name[b]])
+            }) */
+            
+            // list results
+
             for(var i=0; i<x.name.length;i++){
-                $('<li></li>').appendTo(cBioNavOl)
+                $('<li> <input id="cBioTumorCheck_'+i+'" type="checkbox"> '+x.name[i]+'</li>').appendTo(cBioNavOl)
             }
             4
         })
